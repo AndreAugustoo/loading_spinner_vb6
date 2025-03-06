@@ -10,19 +10,24 @@ Este projeto ensina como criar um **Loading Spinner moderno e reutilizável** no
 ## 📌 Como Utilizar
 
 ### 1️⃣ Importar o Formulário de Spinner  
-Baixe o arquivo **`frmSpinner.frm`** e adicione-o ao seu projeto VB6.
+Baixe os arquivos **`frm_loading_spinner.frm`** / **`ModuloLoadingSpinner.bas`** adicione-o ao seu projeto VB6.
 
-### 2️⃣ Criar a Função para Exibir o Spinner  
-No seu formulário principal, adicione a seguinte função:
+### 2️⃣ Chamar a Sub para Exibir o Spinner
+Use "IsLoading True" no inicio do processamento
+Use "DoEvents" durante o processamento
+Use "IsLoading False" no final do processamento
+No seu formulário principal ou em algum formulário que possua um processamento demorado (exemplo ao clicar em um botão), chame a Sub da seguinte maneira:
 
 ```vb
-Dim Spinner As New frmSpinner
+Private Sub Command1_Click()
 
-Public Sub ShowSpinner()
-    Spinner.Show vbModeless
+   IsLoading True
+
+   Dim I As Long
+   For I = 1 To 9999999
     DoEvents
-End Sub
+   Next I
 
-Public Sub HideSpinner()
-    Unload Spinner
+   IsLoading False
+
 End Sub
